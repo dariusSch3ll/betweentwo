@@ -10,7 +10,7 @@ public class EmailSender {
 
         String host = "smtp.gmail.com";
         String user = "BetweenTwoService@gmail.com";
-        String password = "NenOViIT9BAaDxVgAYRb";
+        String password = "";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
