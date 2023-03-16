@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane id="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" stylesheets="@application.css" fx:controller="application.Controller">
+<GridPane id="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" stylesheets="@application.css" fx:controller="application.betweentwo.Controller">
   <children>
   <Label fx:id="headline" id="headline"  text="..."
             GridPane.columnIndex="0" GridPane.rowIndex="0"/>

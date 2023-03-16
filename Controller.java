@@ -1,5 +1,6 @@
-package application;
+package application.betweentwo;
 import java.util.ArrayList;
+
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,13 +44,14 @@ public class Controller {
 	public void setDataInView() {
 		Step currentStep = model.getStepByNum(currStepNum);
 		headline.setText(currentStep.getName()); 			//headline 
-		
+		//Versteckt Weiter und Zurueck Button, wenn die Navigation sich am Anfang und am Ende befindet
+		//Anfang
 		if (currStepNum == 0)	{
 			zurueckButton.setVisible(false);
 		}else {
 			zurueckButton.setVisible(true);
 		}
-		
+		//Ende
 		if (currStepNum == 3)	{
 			weiterButton.setVisible(false);
 		}else {
@@ -128,9 +130,13 @@ public class Controller {
 	
 	@FXML
 	private void bestellen (ActionEvent event) {
-		
-		zutaten.getChildren().removeAll(zutaten.getChildren());
-		setDataInView();
-		
-	}
+		try {
+            EmailSender.sendEmail();
+            zutaten.getChildren().removeAll(zutaten.getChildren());
+            setDataInView();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Fügen Sie hier den Code hinzu, um eine Fehlermeldung anzuzeigen
+        }
+    }
 }

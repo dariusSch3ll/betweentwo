@@ -1,4 +1,4 @@
-package application;
+package application.betweentwo;
 
 import java.util.ArrayList;
 
