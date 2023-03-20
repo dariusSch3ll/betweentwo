@@ -1,5 +1,15 @@
 package application.betweentwo;
 import java.util.ArrayList;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -11,7 +21,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
-
 
 public class Controller {
 
@@ -107,9 +116,6 @@ public class Controller {
 		schrittCounter.setText("Schritt " + (currStepNum+1) + " von " +  model.getStepCount() );
 		
 	}
-
-	
-	
 	@FXML
 	private void weiter (ActionEvent event) {
 		currStepNum++;
@@ -131,12 +137,12 @@ public class Controller {
 	@FXML
 	private void bestellen (ActionEvent event) {
 		try {
-            EmailSender.sendEmail();
-            zutaten.getChildren().removeAll(zutaten.getChildren());
-            setDataInView();
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Fügen Sie hier den Code hinzu, um eine Fehlermeldung anzuzeigen
-        }
-    }
+			//meine Problemstelle
+	        SendGmailTLS.sendGmail();
+	        zutaten.getChildren().removeAll(zutaten.getChildren());
+	        setDataInView();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }

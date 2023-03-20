@@ -28,7 +28,7 @@
   	<HBox styleClass="boxPadding" GridPane.columnIndex="1" GridPane.rowIndex="2" > 
   	 <Region HBox.hgrow="ALWAYS">
    </Region>
-  		<Button id="buttonRed" onAction="#bestellen"> bestellen </Button>
+  		<Button fx:id="bestellenButton" id="buttonRed" onAction="#bestellen"> bestellen </Button>
   	</HBox>
   
   	
