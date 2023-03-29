@@ -21,22 +21,22 @@ Extract the .zip file to a location you remember, for me I put it in my eclipse 
 
 Error: JavaFX runtime components are missing, and are required to run this application
 
-On the RUN button -> run configurations -> Java Application -> New application -> Arguments
-type this: 
-   ```sh
+On the RUN button -> run configurations -> Java Application -> New application -> Arguments type this:
+   ```
    --module-path "ur\path\to\JavaFX_19_SDK\javafx-sdk-19\lib" --add-modules javafx.controls,javafx.fxml
    ``` then your good to go
+
 
 
 ### Installation
 
 
 1. Clone the repo
-   ```sh
+   ```
    git clone git@github.com:dariusSch3ll/betweentwo.git
    ```
 2. In Eclipse IDE
-   ```sh
+   ```
    File -> Import... -> Maven -> Existing Maven Project -> In Root directory, Browse the downloaded repository -> Finish
    ```
 4. Get Started
