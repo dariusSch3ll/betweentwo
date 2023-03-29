@@ -24,10 +24,8 @@ Error: JavaFX runtime components are missing, and are required to run this appli
 On the RUN button -> run configurations -> Java Application -> New application -> Arguments type this:
    ```
    --module-path "ur\path\to\JavaFX_19_SDK\javafx-sdk-19\lib" --add-modules javafx.controls,javafx.fxml
-   ``` then your good to go
-
-
-
+   ``` 
+then your good to go
 ### Installation
 
 
