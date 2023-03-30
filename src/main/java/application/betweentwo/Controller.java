@@ -1,5 +1,9 @@
 package application.betweentwo;
 import java.util.ArrayList;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +16,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 
 public class Controller {
-
+	
+	//Created Logging
+	private static Logger applicationlogger = LogManager.getLogger(Controller.class.getName());
+	
 	private Model model;
 	private int currStepNum;
 	@FXML
@@ -45,18 +52,23 @@ public class Controller {
 		//Versteckt Weiter und Zurueck Button, wenn die Navigation sich am Anfang und am Ende befindet
 		//Anfang
 		if (currStepNum == 0)	{
+			applicationlogger.debug("zurueck button wird versteckt");
 			zurueckButton.setVisible(false);
 		}else {
+			applicationlogger.debug("zurueck button wird wieder angezeigt");
 			zurueckButton.setVisible(true);
 		}
 		//Ende
 		if (currStepNum == 3)	{
+			applicationlogger.debug("weiter button wird versteckt");
 			weiterButton.setVisible(false);
 		}else {
+			applicationlogger.debug("weiter button wird wieder angezeigt");
 			weiterButton.setVisible(true);
 		}
 	
 		ArrayList<Product> produkte = currentStep.getProducts();
+		applicationlogger.debug("Populating products...");
 		for(int i= 0; i < produkte.size();i++) {
 			
 			Product p = produkte.get(i);
@@ -100,7 +112,7 @@ public class Controller {
 			
 			
 		}
-
+		applicationlogger.debug("Products populated...");
 		
 		schrittCounter.setText("Schritt " + (currStepNum+1) + " von " +  model.getStepCount() );
 		
@@ -126,12 +138,14 @@ public class Controller {
 	@FXML
 	private void bestellen (ActionEvent event) {
 		try {
-			//meine Problemstelle
+			applicationlogger.debug("Bestellen button triggers SendGmailTLS Class...");
 	        SendGmailTLS.sendGmail();
 	        zutaten.getChildren().removeAll(zutaten.getChildren());
 	        setDataInView();
+	        
 	    } catch (Exception e) {
 	        e.printStackTrace();
+	        applicationlogger.error("Konnte nicht bestellen SendGmailTLS ueberpruefen");
 	    }
 	}
 }

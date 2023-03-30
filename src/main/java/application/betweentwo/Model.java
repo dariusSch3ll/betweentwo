@@ -2,8 +2,14 @@ package application.betweentwo;
 
 import java.util.ArrayList;
 
-public class Model {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+public class Model {
+	
+	//Created Logging
+	private static Logger applicationlogger = LogManager.getLogger(Model.class.getName());
+		
 	private ArrayList<Step> steps;
 
 	public Model() {
@@ -15,6 +21,7 @@ public class Model {
 	}
 
 	public void generateData() {
+		applicationlogger.debug("Building products...");
 		Product s = new Product("Sesam", 2.20);
 		Product v = new Product("Vollkorn", 2.00);
 		Product w = new Product("Weissbrot", 1.90);
@@ -86,11 +93,13 @@ public class Model {
 	}
 
 	public Step getStepByNum(int num) {
+		applicationlogger.debug("Get current Step by Number and return Value...");
 		return steps.get(num);
-
+		
 	}
 	
 	public int getStepCount() {
+		applicationlogger.debug("Get Number from all Steps and return Value...");
 		return steps.size();
 	}
 	
