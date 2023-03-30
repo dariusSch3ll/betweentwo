@@ -2,14 +2,8 @@ package application.betweentwo;
 
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class Model {
-	
-	//Created Logging
-	private static Logger applicationlogger = LogManager.getLogger(Model.class.getName());
-		
+
 	private ArrayList<Step> steps;
 
 	public Model() {
@@ -21,28 +15,27 @@ public class Model {
 	}
 
 	public void generateData() {
-		applicationlogger.debug("Building products...");
 		Product s = new Product("Sesam", 2.20);
 		Product v = new Product("Vollkorn", 2.00);
 		Product w = new Product("Weissbrot", 1.90);
 
-		Product f1 = new Product("Hähnchen", 3.00);
+		Product f1 = new Product("Haenhnchen", 3.00);
 		Product f2 = new Product("Tunfisch", 2.00);
 		Product f3 = new Product("Fajita", 3.50);
 		Product f4 = new Product("Cheddar", 2.00);
-		Product f5 = new Product("Mozarella", 1.30);
-		Product f6 = new Product("Schmelzkäse", 1.00);
+		Product f5 = new Product("Mozzarella", 1.30);
+		Product f6 = new Product("Schmelzkaese", 1.00);
 
 		Product f7  = new Product("Salat", 1.00);
 		Product f8  = new Product("Tomaten", 1.00);
-		Product f9  = new Product("Gewürzgurken", 1.00);
+		Product f9  = new Product("Gewruzgurken", 1.00);
 		Product f10 = new Product("Paprika", 1.00);
 		Product f11 = new Product("Rote Zwiebeln ", 1.00);
 		Product f12 = new Product("Jalapenos", 1.00);
 		Product f13 = new Product("Majo light", 0.50);
 		Product f14 = new Product("Senf ", 0.50);
 		Product f15 = new Product("Ketchup", 0.50);
-		Product f16 = new Product("Knoblauch Soße", 0.50);
+		Product f16 = new Product("Knoblauch Sosse", 0.50);
 		Product f17 = new Product("Sweet Onion  ", 0.50);
 
 		Product f18 = new Product("Cookie ", 3.00);
@@ -57,7 +50,7 @@ public class Model {
 		s1.add(v);
 		s1.add(w);
 
-		Step s2 = new Step("Fleisch + Käse");
+		Step s2 = new Step("Fleisch & Kaese");
 		s2.add(f1);
 		s2.add(f2);
 		s2.add(f3);
@@ -65,7 +58,7 @@ public class Model {
 		s2.add(f5);
 		s2.add(f6);
 
-		Step s3 = new Step("Belag + Soße");
+		Step s3 = new Step("Belag & Sosse");
 		s3.add(f7);
 		s3.add(f8);
 		s3.add(f9);
@@ -93,13 +86,11 @@ public class Model {
 	}
 
 	public Step getStepByNum(int num) {
-		applicationlogger.debug("Get current Step by Number and return Value...");
 		return steps.get(num);
-		
+
 	}
 	
 	public int getStepCount() {
-		applicationlogger.debug("Get Number from all Steps and return Value...");
 		return steps.size();
 	}
 	

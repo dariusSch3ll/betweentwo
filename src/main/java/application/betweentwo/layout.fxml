@@ -18,12 +18,40 @@
   
   </VBox>
   
-  	</ScrollPane> 
+  </ScrollPane> 
   	
   	<VBox id="vboxPadding" GridPane.columnIndex="1" GridPane.rowIndex="1"> 
+  	
   		<ScrollPane styleClass="scrollBackground"  >
+  		
+  		<VBox fx:id="zsmf" id="zsmf" > 
+  
+  		</VBox>
+  		
   		</ScrollPane> 
   	</VBox>
+  	
+  	
+  	
+  <VBox id="WareBerechnen" GridPane.columnIndex="1" GridPane.rowIndex="2" >
+  
+  <ScrollPane styleClass="SB"  >
+  		
+  		<VBox fx:id="rechnen" id="rechnen" > 
+  
+  		</VBox>
+  		
+  </ScrollPane> 
+  </VBox>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	
   	<HBox styleClass="boxPadding" GridPane.columnIndex="1" GridPane.rowIndex="2" > 
   	 <Region HBox.hgrow="ALWAYS">

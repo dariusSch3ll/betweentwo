@@ -1,6 +1,7 @@
 package application.betweentwo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Step {
 	private String name;
@@ -16,7 +17,7 @@ public class Step {
 		return name;
 	}
 
-	public ArrayList<Product> getProducts() {
+	public ArrayList<Product> getProducts1() {
 		return products;
 	}
 	
@@ -24,4 +25,20 @@ public class Step {
 		products.add(product);
 	}
 
+	
+	   public void removeProduct(Product product) {
+	        products.remove(product);
+	    }
+
+	    public List<Product> getProducts() {
+	        return products;
+	    }
+
+	  
+  
 }
+	
+	
+	
+	
+	

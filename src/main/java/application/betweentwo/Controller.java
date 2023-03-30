@@ -1,25 +1,23 @@
 package application.betweentwo;
 import java.util.ArrayList;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 public class Controller {
-	
-	//Created Logging
-	private static Logger applicationlogger = LogManager.getLogger(Controller.class.getName());
-	
+
 	private Model model;
 	private int currStepNum;
 	@FXML
@@ -27,17 +25,27 @@ public class Controller {
 	@FXML
 	private VBox zutaten;
 	@FXML
+	private VBox zsmf;
+	@FXML
+	private VBox rechnen;
+	@FXML
+	private VBox WareBerechnen;
+	@FXML
 	private Label schrittCounter;
 	@FXML
 	private Button zurueckButton;
 	@FXML
 	private Button weiterButton;
 
+
+
 	public Controller() {
 		this.model = new Model();
 		model.generateData();
+	
 
 		this.currStepNum = 0;
+		
 	}
 
 	@FXML
@@ -46,36 +54,33 @@ public class Controller {
 	}
 	
 	
-	public void setDataInView() {
+	
+	public  void setDataInView() {
 		Step currentStep = model.getStepByNum(currStepNum);
 		headline.setText(currentStep.getName()); 			//headline 
 		//Versteckt Weiter und Zurueck Button, wenn die Navigation sich am Anfang und am Ende befindet
 		//Anfang
 		if (currStepNum == 0)	{
-			applicationlogger.debug("zurueck button wird versteckt");
 			zurueckButton.setVisible(false);
 		}else {
-			applicationlogger.debug("zurueck button wird wieder angezeigt");
 			zurueckButton.setVisible(true);
 		}
 		//Ende
 		if (currStepNum == 3)	{
-			applicationlogger.debug("weiter button wird versteckt");
 			weiterButton.setVisible(false);
 		}else {
-			applicationlogger.debug("weiter button wird wieder angezeigt");
 			weiterButton.setVisible(true);
 		}
 	
-		ArrayList<Product> produkte = currentStep.getProducts();
-		applicationlogger.debug("Populating products...");
+		ArrayList<Product> produkte = (ArrayList<Product>) currentStep.getProducts();
 		for(int i= 0; i < produkte.size();i++) {
-			
 			Product p = produkte.get(i);
 			
-			Label l = new Label (p.getName());
-			HBox hb = new HBox (); 
+			//Zutaten erscheinen auf der gro�en Hbox
+			Label L = new Label (p.getName());
 			
+			//neue Hbox erstellen
+			HBox hb = new HBox (); 
 			
 			hb.setPrefWidth(517);
 	 
@@ -83,38 +88,95 @@ public class Controller {
 			Region platzhalter = new Region(); 
 			HBox.setHgrow(platzhalter, Priority.ALWAYS);
 			
-			l.setStyle(" -fx-padding: 0px 0px 0px 10px;");
-			
+			L.setStyle(" -fx-padding: 0px 0px 0px 10px;");
 			
 			Label preisL = new Label (produkte.get(i).getPrice()+"");
 			
 			
+			//Checkbox
 			CheckBox cb = new CheckBox(); 
 			HBox.setHgrow(cb, Priority.ALWAYS);
 			
 			Label lcb = new Label ();
 			
-			cb.selectedProperty().addListener(
-				      (ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-				    	  System.out.println(p.getName());
-				      });
+		
+		       
+			
+		
+				    	  
+			cb.setOnAction(event -> {
+			    double ergebnis = 0;
+			    for (Node node : zsmf.getChildren()) {
+			        if (node instanceof HBox) {
+			            HBox hbox = (HBox) node;
+			            if (hbox.getChildren().size() == 2 && hbox.getChildren().get(0) instanceof Label && hbox.getChildren().get(1) instanceof Label) {
+			                Label priceLabel = (Label) hbox.getChildren().get(1);
+			                try {
+			                    double getPrice = Double.parseDouble(priceLabel.getText());
+			                    ergebnis += getPrice;
+			                } catch (NumberFormatException e) {
+			                
+			                }
+			            }
+			        }
+			    }
+			    if (cb.isSelected()) {
+			        ergebnis += p.getPrice();
+			    } else {
+			        ergebnis -= p.getPrice();
+			    }
+			    rechnen.getChildren().clear();
+			    rechnen.getChildren().add(new Label(ergebnis + " Euro"));
+			    
+			    if (cb.isSelected()) {
+			        // Erstelle eine HBox f�r Name und Preis
+			        HBox productBox = new HBox();
+			        productBox.setAlignment(Pos.CENTER_LEFT);
+
+			        Label nameLabel = new Label(p.getName());
+			        nameLabel.setPrefWidth(170);
+			 
+
+			        Label priceLabel = new Label(p.getPrice() + "");
+			        
+
+			        productBox.getChildren().addAll(nameLabel, priceLabel);
+
+			        zsmf.getChildren().add(productBox);
+			    } else {
+			        zsmf.getChildren().removeIf(node -> {
+			            if (node instanceof HBox) {
+			                HBox hbox = (HBox) node;
+			                if (hbox.getChildren().size() == 2 && hbox.getChildren().get(0) instanceof Label && hbox.getChildren().get(1) instanceof Label) {
+			                    Label nameLabel = (Label) hbox.getChildren().get(0);
+			                    Label priceLabel = (Label) hbox.getChildren().get(1);
+			                    return nameLabel.getText().equals(p.getName()) && priceLabel.getText().equals(p.getPrice() + "");
+			                }
+			            }
+			            return false;
+			        });
+			    }
+			});
+
+			
+
 			
 		
 			hb.getChildren().add(cb);
 			hb.getChildren().add(lcb);
-			hb.getChildren().add(l);
+			hb.getChildren().add(L);
 			hb.getChildren().add(platzhalter);
 			hb.getChildren().add(preisL);
 			
 
 			zutaten.getChildren().add(hb);
 			
-			
-			
 		}
-		applicationlogger.debug("Products populated...");
+
 		
 		schrittCounter.setText("Schritt " + (currStepNum+1) + " von " +  model.getStepCount() );
+		
+		
 		
 	}
 	@FXML
@@ -126,26 +188,54 @@ public class Controller {
 		
 		
 	}
+
+
 	
 	@FXML
 	private void zurueck (ActionEvent event) {
+	
 		currStepNum--;
 		zutaten.getChildren().removeAll(zutaten.getChildren());
 		setDataInView();
+	
 		
 	}
 	
 	@FXML
 	private void bestellen (ActionEvent event) {
-		try {
-			applicationlogger.debug("Bestellen button triggers SendGmailTLS Class...");
-	        SendGmailTLS.sendGmail();
-	        zutaten.getChildren().removeAll(zutaten.getChildren());
-	        setDataInView();
-	        
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        applicationlogger.error("Konnte nicht bestellen SendGmailTLS ueberpruefen");
-	    }
+	
+       SendGmailTLS.sendGmail();
+        zutaten.getChildren().removeAll(zutaten.getChildren());
+        setDataInView();
+        
+        Stage messageStage = new Stage();
+        
+        Label BetweenTwo = new Label("\n\nBetweenTwo\n");
+       
+        BetweenTwo.setFont(Font.font("SansSerif", FontWeight.BOLD, 15));
+        
+        Label schrift = new Label("Vielen Dank !"
+        		+ "\nIhre Bestellung "
+        		+ "wird so schnell wie möglich geliefert :)");
+       
+        schrift.setFont(Font.font("Serif", FontWeight.BOLD, 15));
+       
+
+        VBox messageBox = new VBox(BetweenTwo,schrift);
+        messageBox.setAlignment(Pos.CENTER);
+        messageBox.setSpacing(50);
+        messageBox.setStyle("-fx-background-color:#B2E097;");
+        
+        
+        
+        Scene messageScene = new Scene(messageBox,400, 200);
+        messageStage.setScene(messageScene);
+        messageStage.show();
+       
+        
+ 
 	}
+  
+
+
 }
