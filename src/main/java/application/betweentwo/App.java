@@ -21,14 +21,15 @@ public class App extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		applicationlogger.info("searching layout.fxml...");
 		Parent root = FXMLLoader.load(getClass().getResource("layout.fxml"));
-	    
+		applicationlogger.info("layout.fxml has been found!");
         Scene scene = new Scene(root, 800, 400);
-    
+        applicationlogger.info("Building scene...");
         primaryStage.setTitle("FXML Welcome");
         primaryStage.setScene(scene);
         primaryStage.show();
+        applicationlogger.info("Program has launched!");
 		
 	}
 
