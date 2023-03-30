@@ -1,6 +1,4 @@
 package application.betweentwo;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,13 +16,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
-
-
 public class Controller {
-	
-	//Created Logging
-	private static Logger applicationlogger = LogManager.getLogger(Controller.class.getName());
-	
+
 	private Model model;
 	private int currStepNum;
 	@FXML
@@ -44,11 +37,15 @@ public class Controller {
 	@FXML
 	private Button weiterButton;
 
+
+
 	public Controller() {
 		this.model = new Model();
 		model.generateData();
+	
 
 		this.currStepNum = 0;
+		
 	}
 
 	@FXML
@@ -57,24 +54,21 @@ public class Controller {
 	}
 	
 	
-	public void setDataInView() {
+	
+	public  void setDataInView() {
 		Step currentStep = model.getStepByNum(currStepNum);
 		headline.setText(currentStep.getName()); 			//headline 
 		//Versteckt Weiter und Zurueck Button, wenn die Navigation sich am Anfang und am Ende befindet
 		//Anfang
 		if (currStepNum == 0)	{
-			applicationlogger.debug("zurueck button wird versteckt");
 			zurueckButton.setVisible(false);
 		}else {
-			applicationlogger.debug("zurueck button wird wieder angezeigt");
 			zurueckButton.setVisible(true);
 		}
 		//Ende
 		if (currStepNum == 3)	{
-			applicationlogger.debug("weiter button wird versteckt");
 			weiterButton.setVisible(false);
 		}else {
-			applicationlogger.debug("weiter button wird wieder angezeigt");
 			weiterButton.setVisible(true);
 		}
 	
@@ -209,38 +203,39 @@ public class Controller {
 	
 	@FXML
 	private void bestellen (ActionEvent event) {
-		try {
-			applicationlogger.debug("Bestellen button triggers SendGmailTLS Class...");
-	        SendGmailTLS.sendGmail();
-	        zutaten.getChildren().removeAll(zutaten.getChildren());
-	        setDataInView();
-	        
-	        Stage messageStage = new Stage();
-	        
-	        Label BetweenTwo = new Label("\n\nBetweenTwo\n");
-	       
-	        BetweenTwo.setFont(Font.font("SansSerif", FontWeight.BOLD, 15));
-	        
-	        Label schrift = new Label("Vielen Dank !"
-	        		+ "\nIhre Bestellung "
-	        		+ "wird so schnell wie moeglich geliefert :)");
-	       
-	        schrift.setFont(Font.font("Serif", FontWeight.BOLD, 15));
-	       
+	
+       SendGmailTLS.sendGmail();
+        zutaten.getChildren().removeAll(zutaten.getChildren());
+        setDataInView();
+        
+        Stage messageStage = new Stage();
+        
+        Label BetweenTwo = new Label("\n\nBetweenTwo\n");
+       
+        BetweenTwo.setFont(Font.font("SansSerif", FontWeight.BOLD, 15));
+        
+        Label schrift = new Label("Vielen Dank !"
+        		+ "\nIhre Bestellung "
+        		+ "wird so schnell wie möglich geliefert :)");
+       
+        schrift.setFont(Font.font("Serif", FontWeight.BOLD, 15));
+       
 
-	        VBox messageBox = new VBox(BetweenTwo,schrift);
-	        messageBox.setAlignment(Pos.CENTER);
-	        messageBox.setSpacing(50);
-	        messageBox.setStyle("-fx-background-color:#B2E097;");
-	        
-	        
-	        
-	        Scene messageScene = new Scene(messageBox,400, 200);
-	        messageStage.setScene(messageScene);
-	        messageStage.show();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        applicationlogger.error("Konnte nicht bestellen SendGmailTLS ueberpruefen");
-	    }
+        VBox messageBox = new VBox(BetweenTwo,schrift);
+        messageBox.setAlignment(Pos.CENTER);
+        messageBox.setSpacing(50);
+        messageBox.setStyle("-fx-background-color:#B2E097;");
+        
+        
+        
+        Scene messageScene = new Scene(messageBox,400, 200);
+        messageStage.setScene(messageScene);
+        messageStage.show();
+       
+        
+ 
 	}
+  
+
+
 }

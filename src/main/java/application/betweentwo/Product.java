@@ -1,5 +1,6 @@
 package application.betweentwo;
 
+
 public class Product {
 	private String name; 
 	private double price; 

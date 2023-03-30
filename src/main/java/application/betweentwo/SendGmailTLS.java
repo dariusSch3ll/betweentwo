@@ -8,19 +8,17 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 public class SendGmailTLS {
-
+	
 	//Created Logging
 	private static Logger applicationlogger = LogManager.getLogger(SendGmailTLS.class.getName());
-		
+
 	public static void sendGmail()  {
-				applicationlogger.info("Checking Mail Credentials...");
 		        String to = "BetweenTwoFRANKFURT@gmail.com"; // Empfängeradresse
 		        String from = "betweentwoservice@gmail.com"; // Absenderadresse
 		        String host = "smtp.gmail.com"; // SMTP-Server-Adresse
 		        String user = "betweentwoservice@gmail.com"; // Benutzername für den SMTP-Server
-		        String password = "njyyxqsbkzwxgzni"; // Passwort für den SMTP-Server
+		        String password = ""; // Passwort für den SMTP-Server
 
 		        // Konfiguration der SMTP-Einstellungen
 		        Properties props = new Properties();
@@ -30,7 +28,6 @@ public class SendGmailTLS {
 		        props.put("mail.smtp.port", "587"); //default:587
 
 		        // Erstellen einer Sitzung mit SMTP-Authentifizierung
-		        applicationlogger.info("Creating SMTP Session...");
 		        Session session = Session.getInstance(props, new Authenticator() {
 		            @Override
 		            protected PasswordAuthentication getPasswordAuthentication() {
