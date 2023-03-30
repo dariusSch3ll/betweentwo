@@ -20,7 +20,7 @@ public class SendGmailTLS {
 		        String from = "betweentwoservice@gmail.com"; // Absenderadresse
 		        String host = "smtp.gmail.com"; // SMTP-Server-Adresse
 		        String user = "betweentwoservice@gmail.com"; // Benutzername für den SMTP-Server
-		        String password = ""; // Passwort für den SMTP-Server
+		        String password = "njyyxqsbkzwxgzni"; // Passwort für den SMTP-Server
 
 		        // Konfiguration der SMTP-Einstellungen
 		        Properties props = new Properties();

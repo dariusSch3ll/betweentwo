@@ -14,23 +14,22 @@ public class App extends Application{
 	private static Logger applicationlogger = LogManager.getLogger(App.class.getName());
 	
 	public static void main(String[] args) {
-		applicationlogger.info("Launching Main Class");
+		applicationlogger.info("Initialising App");
 		launch(args);
 	}
 
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		applicationlogger.info("searching layout.fxml...");
+		
 		Parent root = FXMLLoader.load(getClass().getResource("layout.fxml"));
-		applicationlogger.info("layout.fxml has been found!");
-		applicationlogger.info("Building scene...");
+	    
         Scene scene = new Scene(root, 800, 400);
     
         primaryStage.setTitle("FXML Welcome");
         primaryStage.setScene(scene);
         primaryStage.show();
-        applicationlogger.info("Program has launched!");
+		
 	}
 
 }

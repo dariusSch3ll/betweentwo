@@ -8,7 +8,7 @@
 
 <GridPane id="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" stylesheets="@application.css" fx:controller="application.betweentwo.Controller">
   <children>
-  <Label fx:id="headline" id="headline"  text="..."
+<Label fx:id="headline" id="headline"  text="..."
             GridPane.columnIndex="0" GridPane.rowIndex="0"/>
             
             
@@ -18,12 +18,40 @@
   
   </VBox>
   
-  	</ScrollPane> 
+  </ScrollPane> 
   	
   	<VBox id="vboxPadding" GridPane.columnIndex="1" GridPane.rowIndex="1"> 
+  	
   		<ScrollPane styleClass="scrollBackground"  >
+  		
+  		<VBox fx:id="zsmf" id="zsmf" > 
+  
+  		</VBox>
+  		
   		</ScrollPane> 
   	</VBox>
+  	
+  	
+  	
+  <VBox id="WareBerechnen" GridPane.columnIndex="1" GridPane.rowIndex="2" >
+  
+  <ScrollPane styleClass="SB"  >
+  		
+  		<VBox fx:id="rechnen" id="rechnen" > 
+  
+  		</VBox>
+  		
+  </ScrollPane> 
+  </VBox>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	
   	<HBox styleClass="boxPadding" GridPane.columnIndex="1" GridPane.rowIndex="2" > 
   	 <Region HBox.hgrow="ALWAYS">

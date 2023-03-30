@@ -1,14 +1,28 @@
 #background {
-	-fx-background-color: #BF9B7A;
+	-fx-background-color:#038C65;
 	-fx-padding:20px;
  }
  
  .scrollBackground {
 
- 	-fx-background:#F2E4D8;
- 	-fx-background-color: #F2E4D8;
+ 	-fx-background:#ADBF9B;
+ 	-fx-background-color:#ADBF9B;
  
  }
+ 
+ #WareBerechnen{
+
+	-fx-padding: -40px 0px 0px 150px;
+ 	
+ }
+ 
+ 
+ .SB{
+	-fx-background:#ADBF9B;
+ 	-fx-background-color: #ADBF9B;
+ 
+ }
+ 
  
  #headline{
 	 -fx-padding: 0px 0px 10px 0px;
@@ -18,13 +32,20 @@
  }
  
  .boxPadding{
- 	-fx-padding: 20px 0px 20px 0px;
+ 	-fx-padding: 20px 0px 3px 0px;
 
  }
  
  #vboxPadding{
 	 -fx-padding: 0px 0px 0px 20px;
  }
+ 
+ 
+  #vboxPadding{
+  
+  -fx-padding: 0px 0px 0px 10px;
+
+  }
  
  #buttonRed{
 	 -fx-background-color: #bf1304;
@@ -83,3 +104,21 @@
 	 -fx-font-weight:bold;
  }
 
+#zsmf{
+
+ 	 -fx-padding: 05px 05px 10px 05px;
+	 -fx-text-fill: #fff; 
+	 -fx-font-size:13px;
+	 -fx-font-weight:bold;
+
+}
+
+
+
+#rechnen{
+	 -fx-padding: 05px 05px 10px 05px;
+	 -fx-font-size:13px;
+	 -fx-font-weight:bold;
+	 
+
+}
