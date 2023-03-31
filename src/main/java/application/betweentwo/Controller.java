@@ -204,9 +204,27 @@ public class Controller {
 	@FXML
 	private void bestellen (ActionEvent event) {
 	
-       SendGmailTLS.sendGmail();
-        zutaten.getChildren().removeAll(zutaten.getChildren());
-        setDataInView();
+		zutaten.getChildren().removeAll(zutaten.getChildren());
+	       
+        
+	     
+        String name = "";
+        String preis= ""; 
+        for (Node node : zsmf.getChildren()) {
+	        if (node instanceof HBox) {
+	            HBox hbox = (HBox) node;
+	            if (hbox.getChildren().size() == 2 && hbox.getChildren().get(0) instanceof Label && hbox.getChildren().get(1) instanceof Label) {
+	                Label nameLabel = (Label) hbox.getChildren().get(0);
+	                name +=nameLabel.getText()+", ";
+	                Label priceLabel = (Label) hbox.getChildren().get(1);
+	                preis +=priceLabel.getText()+", ";
+	                
+	                
+	            }
+	        } 
+	   }
+        SendGmailTLS.sendGmail(name);
+        SendGmailTLS.sendGmail(preis);
         
         Stage messageStage = new Stage();
         
