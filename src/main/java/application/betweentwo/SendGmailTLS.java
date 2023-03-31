@@ -13,7 +13,7 @@ public class SendGmailTLS {
 	//Created Logging
 	private static Logger applicationlogger = LogManager.getLogger(SendGmailTLS.class.getName());
 
-	public static void sendGmail()  {
+	public static void sendGmail(String bestelldetails)  {
 		        String to = "BetweenTwoFRANKFURT@gmail.com"; // Empfängeradresse
 		        String from = "betweentwoservice@gmail.com"; // Absenderadresse
 		        String host = "smtp.gmail.com"; // SMTP-Server-Adresse
@@ -42,7 +42,7 @@ public class SendGmailTLS {
 		            message.setFrom(new InternetAddress(from));
 		            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 		            message.setSubject("Bestellung ist Eingegangen");
-		            message.setText("Bestellungsdetails");
+		            message.setText("Bestellungsdetails:\n"+ bestelldetails);
 
 		            // Senden der E-Mail-Nachricht
 		            Transport.send(message);
