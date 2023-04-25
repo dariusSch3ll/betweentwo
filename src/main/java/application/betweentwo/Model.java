@@ -20,7 +20,7 @@ public class Model {
 		Product w = new Product("Weissbrot", 1.90);
 
 		Product f1 = new Product("Haenhnchen", 3.00);
-		Product f2 = new Product("Tunfisch", 2.00);
+		Product f2 = new Product("Thunfisch", 2.00);
 		Product f3 = new Product("Fajita", 3.50);
 		Product f4 = new Product("Cheddar", 2.00);
 		Product f5 = new Product("Mozzarella", 1.30);
@@ -43,7 +43,7 @@ public class Model {
 		Product f20 = new Product("Cola Zero", 2.50);
 		Product f21 = new Product("Fanta ", 2.00);
 		Product f22 = new Product("Sprite", 2.00);
-		Product f23 = new Product("Kafee", 1.50);
+		Product f23 = new Product("Kaffee", 1.50);
 
 		Step s1 = new Step("Brot");
 		s1.add(s);
